@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import HowItWorks from './HowItWorks';
 import Sobre from './Sobre';
+import PoliticaPrivacidade from './PoliticaPrivacidade';
 
 // --- Icons (SVG Components) ---
 const CodeIcon = ({ className }: { className?: string }) => (
@@ -590,10 +591,19 @@ const WhatsAppButton = () => (
   </a>
 );
 
-const Footer = () => (
+const Footer = ({ navigate }: { navigate: (path: string) => void }) => (
   <footer className="border-t border-white/10 py-12 bg-dark">
     <div className="container mx-auto px-6 text-center text-slate-500 text-sm">
       <p>© {new Date().getFullYear()} Vórtice Tecnologia. Todos os direitos reservados.</p>
+      <div className="mt-4 flex justify-center gap-6">
+        <a 
+          href="/politica-privacidade" 
+          onClick={(e) => { e.preventDefault(); navigate('/politica-privacidade'); }} 
+          className="hover:text-white transition-colors"
+        >
+          Política de Privacidade
+        </a>
+      </div>
     </div>
   </footer>
 );
@@ -623,6 +633,8 @@ export default function App() {
           <Sobre navigate={navigate} />
         ) : currentPath === '/como-funciona' ? (
           <HowItWorks navigate={navigate} />
+        ) : currentPath === '/politica-privacidade' ? (
+          <PoliticaPrivacidade navigate={navigate} />
         ) : (
           <>
             <Hero />
@@ -632,7 +644,7 @@ export default function App() {
           </>
         )}
       </main>
-      <Footer />
+      <Footer navigate={navigate} />
       <WhatsAppButton />
     </>
   );

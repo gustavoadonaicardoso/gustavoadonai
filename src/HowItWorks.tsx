@@ -16,11 +16,11 @@ const HowItWorks = ({ navigate }: { navigate: (path: string) => void }) => {
       <div className="absolute blob bg-secondary w-[300px] h-[300px] rounded-full bottom-[20%] left-[-50px] opacity-20 animation-delay-2000"></div>
 
       <div className="container mx-auto px-6 py-16">
-        <div className="text-center max-w-3xl mx-auto mb-20 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-6 backdrop-blur-sm">
+        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20 relative z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-[10px] md:text-xs font-semibold uppercase tracking-wider mb-6 backdrop-blur-sm">
             Método Exclusivo Vórtice
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+          <h1 className="text-3xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
             O Método <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary glow-text">SSD</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-400 leading-relaxed font-medium">
@@ -32,11 +32,11 @@ const HowItWorks = ({ navigate }: { navigate: (path: string) => void }) => {
           {/* Pillar 1 */}
           <div className="glass-panel p-8 md:p-12 rounded-3xl relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-xl backdrop-blur-md">
             <div className="absolute top-0 left-0 w-2 h-full bg-primary group-hover:bg-secondary transition-colors duration-500"></div>
-            <div className="flex flex-col md:flex-row gap-8 items-start">
-              <div className="text-6xl md:text-8xl font-black text-white/5 select-none -mt-4 uppercase">S</div>
-              <div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white flex items-center gap-3">
-                  Structure <span className="text-primary font-normal text-xl">(Estruturar)</span>
+            <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+              <div className="text-6xl md:text-8xl font-black text-white/5 select-none -mt-4 uppercase absolute right-4 top-4 md:static">S</div>
+              <div className="relative z-10">
+                <h3 className="text-xl md:text-3xl font-bold mb-4 text-white flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+                  Structure <span className="text-primary font-normal text-lg md:text-xl">(Estruturar)</span>
                 </h3>
                 <p className="text-slate-400 mb-6 leading-relaxed">
                   O primeiro pilar foca em criar alicerces inabaláveis. Antes de buscar volume agressivo, nós implementamos o CRM na sua raiz, auditamos seus processos comerciais atuais e definimos uma engenharia de vendas sólida para o seu time.
@@ -58,11 +58,11 @@ const HowItWorks = ({ navigate }: { navigate: (path: string) => void }) => {
           {/* Pillar 2 */}
           <div className="glass-panel p-8 md:p-12 rounded-3xl relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-xl backdrop-blur-md">
             <div className="absolute top-0 left-0 w-2 h-full bg-secondary group-hover:bg-primary transition-colors duration-500"></div>
-            <div className="flex flex-col md:flex-row gap-8 items-start">
-              <div className="text-6xl md:text-8xl font-black text-white/5 select-none -mt-4 uppercase">S</div>
-              <div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white flex items-center gap-3">
-                  Scale <span className="text-secondary font-normal text-xl">(Escalar)</span>
+            <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+              <div className="text-6xl md:text-8xl font-black text-white/5 select-none -mt-4 uppercase absolute right-4 top-4 md:static">S</div>
+              <div className="relative z-10">
+                <h3 className="text-xl md:text-3xl font-bold mb-4 text-white flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+                  Scale <span className="text-secondary font-normal text-lg md:text-xl">(Escalar)</span>
                 </h3>
                 <p className="text-slate-400 mb-6 leading-relaxed">
                   Com a estrutura validada e forte, passamos a injetar velocidade. Automatizamos tarefas operacionais repetitivas, treinamos gestores e aceleramos o fluxo de leads para maximizar suas conversões de forma robusta e mensurável.
@@ -84,11 +84,11 @@ const HowItWorks = ({ navigate }: { navigate: (path: string) => void }) => {
           {/* Pillar 3 */}
           <div className="glass-panel p-8 md:p-12 rounded-3xl relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300 shadow-xl backdrop-blur-md">
             <div className="absolute top-0 left-0 w-2 h-full bg-primary group-hover:bg-secondary transition-colors duration-500"></div>
-            <div className="flex flex-col md:flex-row gap-8 items-start">
-              <div className="text-6xl md:text-8xl font-black text-white/5 select-none -mt-4 uppercase">D</div>
-              <div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white flex items-center gap-3">
-                  Dominate <span className="text-primary font-normal text-xl">(Dominar)</span>
+            <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+              <div className="text-6xl md:text-8xl font-black text-white/5 select-none -mt-4 uppercase absolute right-4 top-4 md:static">D</div>
+              <div className="relative z-10">
+                <h3 className="text-xl md:text-3xl font-bold mb-4 text-white flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+                  Dominate <span className="text-primary font-normal text-lg md:text-xl">(Dominar)</span>
                 </h3>
                 <p className="text-slate-400 mb-6 leading-relaxed">
                   A última etapa transforma sua empresa em uma verdadeira autoridade na aquisição. Entramos com uma consultoria de altíssimo nível, visando a retenção ativa dos atuais clientes e dominação do market share baseando-se na alta previsibilidade.
@@ -122,7 +122,7 @@ const HowItWorks = ({ navigate }: { navigate: (path: string) => void }) => {
                 }
               }, 100);
             }}
-            className="inline-flex items-center justify-center px-10 py-5 rounded-full bg-gradient-tech text-white font-bold tracking-wide gap-3 hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)]"
+            className="inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 rounded-full bg-gradient-tech text-white font-bold tracking-wide gap-3 hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] text-sm md:text-base"
           >
             Escalar Minhas Vendas
           </a>
