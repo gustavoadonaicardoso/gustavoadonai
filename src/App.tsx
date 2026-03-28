@@ -428,31 +428,33 @@ const ContactForm = () => {
     // -------------------------------------------------------------
     const WEBHOOK_URL = 'https://api.sheetmonkey.io/form/66ng1u7NVH4LvMGFG6hBya'; 
 
-    if (!WEBHOOK_URL) {
-      // Simulação visual de envio caso você não tenha configurado a URL
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setIsSuccess(true);
-        (e.target as HTMLFormElement).reset();
-        setTimeout(() => setIsSuccess(false), 5000);
-      }, 1500);
-      return;
-    }
-
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
     data['Data de Envio'] = new Date().toLocaleString('pt-BR');
 
     try {
-      await fetch(WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      if (WEBHOOK_URL) {
+        await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+      }
+
       setIsSubmitting(false);
       setIsSuccess(true);
       (e.target as HTMLFormElement).reset();
-      setTimeout(() => setIsSuccess(false), 5000);
+
+      // Direcionar para o WhatsApp após sucesso
+      const whatsAppNumber = '551151928940';
+      const whatsAppMessage = encodeURIComponent(`Olá! Acabei de enviar o formulário no site.\n\n*Nome:* ${data['Nome']}\n*Assunto:* ${data['Assunto']}\n*Mensagem:* ${data['Mensagem']}`);
+      const whatsAppUrl = `https://wa.me/${whatsAppNumber}?text=${whatsAppMessage}`;
+
+      // Pequeno delay para o usuário ver a mensagem de sucesso antes do redirecionamento
+      setTimeout(() => {
+        window.location.href = whatsAppUrl;
+      }, 1500);
+
     } catch (error) {
       console.error(error);
       setIsSubmitting(false);
