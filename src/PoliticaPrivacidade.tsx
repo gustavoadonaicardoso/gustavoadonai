@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 
 interface PoliticaPrivacidadeProps {
   navigate: (path: string) => void;
