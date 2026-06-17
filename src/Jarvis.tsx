@@ -88,6 +88,7 @@ const BOOT_MSGS = [
 const BootScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [logs, setLogs] = useState<string[]>([]);
   const [fading, setFading] = useState(false);
+  const onCompleteRef = useRef(onComplete);
 
   useEffect(() => {
     let i = 0;
@@ -98,12 +99,12 @@ const BootScreen = ({ onComplete }: { onComplete: () => void }) => {
         clearInterval(id);
         setTimeout(() => {
           setFading(true);
-          setTimeout(onComplete, 650);
+          setTimeout(() => onCompleteRef.current(), 650);
         }, 350);
       }
     }, 360);
     return () => clearInterval(id);
-  }, [onComplete]);
+  }, []); // runs once — onCompleteRef stays current
 
   return (
     <div className="boot-screen" style={{ opacity: fading ? 0 : 1 }}>
@@ -398,7 +399,7 @@ const ChatPanel = ({ messages, input, isTyping, isListening, onInput, onSend, on
   }, [messages, isTyping]);
 
   return (
-    <div className="j-panel" style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+    <div className="j-panel" style={{ display: 'flex', flexDirection: 'column', minHeight: 0, height: '100%' }}>
       <div className="j-panel-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span>AI INTERFACE</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -473,8 +474,8 @@ const Jarvis = () => {
     { label: 'ARC REACTOR',    value: 100, color: '#00d4ff' },
     { label: 'SUIT INTEGRITY', value: 98,  color: '#00ff9d' },
     { label: 'AI CORE',        value: 100, color: '#00d4ff' },
-    { label: 'NETWORK',         value: 87,  color: '#00ff9d' },
-    { label: 'SHIELD POWER',    value: 94,  color: '#0055ff' },
+    { label: 'NETWORK',        value: 87,  color: '#00ff9d' },
+    { label: 'SHIELD POWER',   value: 94,  color: '#0055ff' },
   ]);
 
   useEffect(() => {
@@ -559,7 +560,7 @@ const Jarvis = () => {
       <div className="hud-corner br" />
 
       <header className="jarvis-topbar">
-        <div style={{ fontSize: '0.58rem', letterSpacing: '0.14em', color: 'rgba(127,218,255,0.6)', lineHeight: 1.7 }}>
+        <div style={{ fontSize: '0.58rem', letterSpacing: '0.14em', color: 'rgba(127,218,255,0.6)', lineHeight: 1.7 }} className="topbar-status">
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span className="status-dot online" />SYSTEM ONLINE
           </div>
@@ -572,7 +573,7 @@ const Jarvis = () => {
           <div className="jarvis-subtitle">JUST A RATHER VERY INTELLIGENT SYSTEM</div>
         </div>
 
-        <div style={{ textAlign: 'right', fontSize: '0.58rem', letterSpacing: '0.1em', color: 'rgba(127,218,255,0.65)', lineHeight: 1.7 }}>
+        <div style={{ textAlign: 'right', fontSize: '0.58rem', letterSpacing: '0.1em', color: 'rgba(127,218,255,0.65)', lineHeight: 1.7 }} className="topbar-time">
           <div style={{
             color: 'var(--j-primary)', fontFamily: 'Orbitron, sans-serif',
             fontSize: '1rem', textShadow: 'var(--j-glow-sm)',
@@ -585,9 +586,11 @@ const Jarvis = () => {
       </header>
 
       <main className="jarvis-main">
-        <StatusPanel stats={stats} />
+        <div className="left-col">
+          <StatusPanel stats={stats} />
+        </div>
 
-        <div className="arc-reactor-wrapper">
+        <div className="center-col arc-reactor-wrapper">
           <div style={{ width: '100%', display: 'flex', justifyContent: 'space-around', padding: '0 10px' }}>
             {[
               { label: 'POWER OUTPUT', value: '3.2 GJ/s' },
@@ -634,16 +637,18 @@ const Jarvis = () => {
           </div>
         </div>
 
-        <ChatPanel
-          messages={messages}
-          input={input}
-          isTyping={isTyping}
-          isListening={isListening}
-          onInput={setInput}
-          onSend={() => sendMessage(input)}
-          onListen={startListening}
-          onKeyDown={handleKeyDown}
-        />
+        <div className="right-col">
+          <ChatPanel
+            messages={messages}
+            input={input}
+            isTyping={isTyping}
+            isListening={isListening}
+            onInput={setInput}
+            onSend={() => sendMessage(input)}
+            onListen={startListening}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
       </main>
 
       <footer className="jarvis-bottombar">

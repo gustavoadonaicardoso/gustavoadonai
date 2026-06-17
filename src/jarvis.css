@@ -87,12 +87,6 @@
   50%       { opacity: 0.45; }
 }
 
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
-
-/* ── ROOT ─────────────────────────────────────────────── */
 .jarvis-root {
   width: 100vw;
   height: 100vh;
@@ -117,7 +111,6 @@
   z-index: 0;
 }
 
-/* ── SCAN LINE ────────────────────────────────────────── */
 .scan-line {
   position: fixed;
   left: 0;
@@ -129,7 +122,6 @@
   z-index: 200;
 }
 
-/* ── HUD CORNERS ─────────────────────────────────────── */
 .hud-corner {
   position: fixed;
   width: 55px;
@@ -165,7 +157,6 @@
 .hud-corner.br::before { bottom: 0; right: 0; }
 .hud-corner.br::after  { bottom: 0; right: 0; }
 
-/* ── TOP BAR ─────────────────────────────────────────── */
 .jarvis-topbar {
   position: relative;
   z-index: 10;
@@ -197,7 +188,6 @@
   margin-top: 3px;
 }
 
-/* ── PANEL ───────────────────────────────────────────── */
 .j-panel {
   background: var(--j-panel);
   border: 1px solid var(--j-border);
@@ -226,7 +216,6 @@
   flex-shrink: 0;
 }
 
-/* ── MAIN LAYOUT ─────────────────────────────────────── */
 .jarvis-main {
   flex: 1;
   display: grid;
@@ -239,7 +228,6 @@
   min-height: 0;
 }
 
-/* ── STAT BARS ───────────────────────────────────────── */
 .stat-bar {
   height: 3px;
   background: rgba(0, 212, 255, 0.12);
@@ -254,7 +242,6 @@
   box-shadow: 0 0 6px currentColor;
 }
 
-/* ── ARC REACTOR ─────────────────────────────────────── */
 .arc-reactor-wrapper {
   display: flex;
   flex-direction: column;
@@ -274,7 +261,6 @@
   flex-shrink: 0;
 }
 
-/* ── RADAR ───────────────────────────────────────────── */
 .radar-container {
   position: relative;
   width: 110px;
@@ -302,7 +288,6 @@
   box-shadow: 0 0 4px var(--j-primary);
 }
 
-/* ── CHAT ────────────────────────────────────────────── */
 .chat-panel-inner {
   display: flex;
   flex-direction: column;
@@ -390,7 +375,6 @@
 .typing-dot:nth-child(2) { animation-delay: 0.2s; }
 .typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
-/* ── CHAT INPUT ──────────────────────────────────────── */
 .chat-input-area {
   border-top: 1px solid var(--j-border);
   padding: 9px;
@@ -446,7 +430,6 @@
   box-shadow: 0 0 8px rgba(255, 50, 50, 0.4);
 }
 
-/* ── BOTTOM BAR ──────────────────────────────────────── */
 .jarvis-bottombar {
   position: relative;
   z-index: 10;
@@ -462,7 +445,6 @@
   flex-shrink: 0;
 }
 
-/* ── STATUS DOT ──────────────────────────────────────── */
 .status-dot {
   width: 6px;
   height: 6px;
@@ -476,7 +458,6 @@
 .status-dot.danger  { background: var(--j-danger);  box-shadow: 0 0 6px var(--j-danger);  animation: cornerBlink 0.7s ease-in-out infinite; }
 .status-dot.idle    { background: #4488aa; box-shadow: 0 0 4px #4488aa; }
 
-/* ── DATA ROW ────────────────────────────────────────── */
 .data-row {
   display: flex;
   justify-content: space-between;
@@ -488,7 +469,6 @@
 
 .data-row:last-child { border-bottom: none; }
 
-/* ── BOOT SCREEN ─────────────────────────────────────── */
 .boot-screen {
   position: fixed;
   inset: 0;
@@ -527,7 +507,6 @@
   animation: bootProgress 3.6s ease forwards;
 }
 
-/* ── LEFT PANEL SCROLL ───────────────────────────────── */
 .left-panel-scroll {
   display: flex;
   flex-direction: column;
@@ -538,3 +517,65 @@
 }
 
 .left-panel-scroll::-webkit-scrollbar { display: none; }
+
+/* ── Column wrappers ─────────────────────────────────── */
+.left-col   { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+.center-col { display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+.right-col  { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+
+/* ── Mobile ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .jarvis-topbar {
+    padding: 8px 50px;
+  }
+
+  .jarvis-title {
+    font-size: 1rem;
+    letter-spacing: 0.25em;
+  }
+
+  .jarvis-subtitle {
+    font-size: 0.42rem;
+    letter-spacing: 0.18em;
+  }
+
+  .topbar-status { display: none; }
+
+  .jarvis-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .left-col { display: none; }
+
+  .center-col {
+    height: auto;
+    max-height: 210px;
+    flex-shrink: 0;
+    gap: 4px;
+  }
+
+  .arc-reactor-svg {
+    max-width: 150px;
+    max-height: 150px;
+  }
+
+  .right-col { flex: 1; min-height: 0; }
+
+  .jarvis-bottombar {
+    padding: 5px 20px;
+    font-size: 0.46rem;
+  }
+
+  .hud-corner { width: 35px; height: 35px; }
+  .hud-corner.tl { top: 8px; left: 8px; }
+  .hud-corner.tr { top: 8px; right: 8px; }
+  .hud-corner.bl { bottom: 8px; left: 8px; }
+  .hud-corner.br { bottom: 8px; right: 8px; }
+
+  .topbar-time .jarvis-title-time {
+    font-size: 0.8rem;
+  }
+}
