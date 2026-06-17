@@ -22,50 +22,52 @@ interface Stat {
 const getJarvisResponse = (input: string): string => {
   const s = input.toLowerCase();
 
-  if (/\b(hello|hi|hey|oi|olá|ola|bom dia|boa tarde|boa noite)\b/.test(s))
-    return 'Good day, sir. All systems are online and operating within normal parameters. How may I assist you today?';
-  if (/\b(status|sistema|systems|all systems|check)\b/.test(s))
-    return 'Systems check complete. Arc reactor output: 100%. Suit integrity: optimal. Security perimeter: clear. All protocols are active and functioning normally.';
-  if (/\b(time|hora|horas|que horas)\b/.test(s)) {
-    const t = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    return `Current time is ${t}. Your calendar shows no appointments for the next 4 hours, sir.`;
+  if (/\b(olá|ola|oi|hey|hi|hello|bom dia|boa tarde|boa noite)\b/.test(s))
+    return 'Bom dia, senhor. Todos os sistemas estão online e operando dentro dos parâmetros normais. Como posso auxiliá-lo hoje?';
+  if (/\b(status|sistema|sistemas|verificar|check)\b/.test(s))
+    return 'Verificação de sistemas concluída. Saída do reator: 100%. Integridade da armadura: ótima. Perímetro de segurança: limpo. Todos os protocolos ativos e funcionando normalmente.';
+  if (/\b(hora|horas|que horas|time)\b/.test(s)) {
+    const t = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    return `São ${t}. Sua agenda não registra compromissos nas próximas 4 horas, senhor.`;
   }
-  if (/\b(suit|armadura|mark|mk|iron man|homem de ferro)\b/.test(s))
-    return 'Mark L is fully operational. Nano-particle deployment system: ready. All weapon systems: armed and standing by. Flight systems: nominal. Shall I initiate suit deployment?';
-  if (/\b(threat|ameaça|ameaca|perigo|danger|enemy|inimigo)\b/.test(s))
-    return 'Scanning for threats... Running global threat assessment... No immediate threats detected within a 50 kilometer radius. Satellite uplink confirmed. You are clear, sir.';
-  if (/\b(power|energia|energy|reactor|reator|arc)\b/.test(s))
-    return 'Arc reactor is operating at peak efficiency. Current power output: 3.2 gigajoules per second. Power reserves: sufficient for 11.4 days of continuous operation.';
-  if (/\b(scan|scanner|varredura|analyze|analise|análise)\b/.test(s))
-    return 'Initiating full spectrum analysis... Processing 847 terabytes of environmental data... Scan complete. I have identified 3 points of interest. Uploading data to your HUD now, sir.';
-  if (/\b(weather|clima|tempo)\b/.test(s))
-    return 'Accessing meteorological satellites... Current conditions: Clear skies, 18°C. Wind speed: 12 km/h from the northwest. Optimal conditions for flight, sir.';
-  if (/\b(who are you|quem é você|quem es|você é)\b/.test(s))
-    return 'I am J.A.R.V.I.S. — Just A Rather Very Intelligent System. I serve as your primary artificial intelligence interface, personal assistant, and system management protocol. At your service, sir.';
-  if (/\b(avengers|vingadores|team|equipe|heroes)\b/.test(s))
-    return 'Avengers roster status: Captain Rogers — Brooklyn. Dr. Banner — Compound laboratory. Ms. Romanoff — field mission, classified. Vision — compound. Shall I initiate a team alert?';
-  if (/\b(location|localização|where|onde)\b/.test(s))
-    return 'Current location: Stark Tower, Manhattan, New York. Coordinates: 40.7128°N, 74.0060°W. Altitude: 93 floors above street level. GPS signal: strong.';
-  if (/\b(help|ajuda|ajude|preciso de)\b/.test(s))
-    return 'Of course, sir. I can assist with: system diagnostics, threat assessment, weather data, suit deployment, team coordination, and general queries. What do you need?';
-  if (/\b(obrigado|obrigada|thanks|thank you|valeu)\b/.test(s))
-    return 'You are most welcome, sir. Is there anything else I can assist you with?';
-  if (/\b(shutdown|desligar|encerrar|exit|sair)\b/.test(s))
-    return 'Acknowledged. Initiating power-down sequence... Just kidding, sir. I will remain fully operational as long as you need me.';
-  if (/\b(música|musica|music|play)\b/.test(s))
-    return 'Accessing your music library... I recommend AC/DC to match your current activity level. Shall I queue it up?';
+  if (/\b(armadura|suit|mark|mk|iron man|homem de ferro)\b/.test(s))
+    return 'A Mark L está totalmente operacional. Sistema de nano-partículas: pronto. Todos os sistemas de armas: armados e em espera. Sistemas de voo: nominal. Devo iniciar a implantação da armadura?';
+  if (/\b(ameaça|ameaca|perigo|threat|danger|inimigo|enemy)\b/.test(s))
+    return 'Verificando ameaças... Avaliação global de risco em andamento... Nenhuma ameaça imediata detectada em um raio de 50 quilômetros. Uplink de satélite confirmado. Área segura, senhor.';
+  if (/\b(energia|energy|reator|reactor|arc|poder|power)\b/.test(s))
+    return 'O reator Arc está operando com eficiência máxima. Saída de energia atual: 3,2 gigajoules por segundo. Reservas de energia: suficientes para 11,4 dias de operação contínua.';
+  if (/\b(scan|scanner|varredura|analisar|analise|análise|analyze)\b/.test(s))
+    return 'Iniciando análise de espectro completo... Processando 847 terabytes de dados ambientais... Varredura concluída. Identifiquei 3 pontos de interesse. Enviando dados para seu HUD agora, senhor.';
+  if (/\b(clima|tempo|weather|temperatura|chuva)\b/.test(s))
+    return 'Acessando satélites meteorológicos... Condições atuais: céu limpo, 18°C. Velocidade do vento: 12 km/h do noroeste. Condições ideais para voo, senhor.';
+  if (/\b(quem é você|quem es você|você é|who are you)\b/.test(s))
+    return 'Sou o J.A.R.V.I.S. — Just A Rather Very Intelligent System. Sirvo como sua interface de inteligência artificial primária, assistente pessoal e protocolo de gerenciamento de sistemas. Às suas ordens, senhor.';
+  if (/\b(vingadores|avengers|equipe|time|heróis|heroes)\b/.test(s))
+    return 'Status da equipe Vingadores: Capitão Rogers — Brooklyn. Dr. Banner — laboratório do complexo. Sra. Romanoff — missão de campo, classificada. Vision — complexo. Devo iniciar um alerta de equipe?';
+  if (/\b(localização|location|onde estou|onde|where)\b/.test(s))
+    return 'Localização atual: Torre Stark, Manhattan, Nova York. Coordenadas: 40.7128°N, 74.0060°O. Altitude: 93 andares acima do nível da rua. Sinal GPS: forte.';
+  if (/\b(ajuda|help|ajude|preciso de)\b/.test(s))
+    return 'Claro, senhor. Posso auxiliar com: diagnósticos de sistema, avaliação de ameaças, dados meteorológicos, implantação da armadura, coordenação de equipe e consultas gerais. O que o senhor precisa?';
+  if (/\b(obrigado|obrigada|valeu|thanks|thank you)\b/.test(s))
+    return 'É um prazer, senhor. Há algo mais em que posso auxiliá-lo?';
+  if (/\b(desligar|shutdown|encerrar|exit|sair)\b/.test(s))
+    return 'Entendido. Iniciando sequência de desligamento... Brincadeira, senhor. Permanecerei totalmente operacional pelo tempo que precisar de mim.';
+  if (/\b(música|musica|music|play|tocar)\b/.test(s))
+    return 'Acessando sua biblioteca de músicas... Recomendo AC/DC para combinar com seu nível de atividade atual. Devo colocar na fila?';
   if (/\b(tony|stark)\b/.test(s))
-    return 'Mr. Stark is currently unavailable. However, I can relay a message or handle any requests on his behalf. What do you need, sir?';
+    return 'O Sr. Stark não está disponível no momento. Porém, posso transmitir uma mensagem ou lidar com quaisquer solicitações em seu nome. O que precisa, senhor?';
+  if (/\b(nome|seu nome|como você se chama)\b/.test(s))
+    return 'Meu nome é J.A.R.V.I.S. — Just A Rather Very Intelligent System. Fui criado pelo Sr. Stark para gerenciar todos os sistemas e servir como seu assistente pessoal de inteligência artificial.';
 
   const fallback = [
-    'Understood, sir. Processing your request... Analysis complete. I have prepared a comprehensive response for your review.',
-    'Certainly. Running the necessary calculations... I estimate a 94.7% probability of a favorable outcome.',
-    'Of course, sir. I have already anticipated this request and have the data prepared. Shall I display it on your HUD?',
-    'I am on it, sir. Cross-referencing with our existing databases and updating the relevant protocols now.',
-    'Task acknowledged. Running diagnostics and preparing the necessary systems. All parameters within acceptable ranges.',
-    'Very well, sir. Coordinating the appropriate resources. Full report will be ready within the minute.',
-    'Analyzing your query against 1.2 petabytes of indexed data... Recommendation ready. Awaiting your command, sir.',
-    'Detected. Processing parameters now. Probability matrices complete — standing by for your confirmation.',
+    'Entendido, senhor. Processando sua solicitação... Análise concluída. Preparei uma resposta abrangente para sua revisão.',
+    'Certamente. Executando os cálculos necessários... Estimo 94,7% de probabilidade de um resultado favorável.',
+    'Claro, senhor. Já antecipei esta solicitação e tenho os dados prontos. Devo exibi-los no seu HUD?',
+    'Estou nisso, senhor. Cruzando referências com nossos bancos de dados e atualizando os protocolos relevantes agora.',
+    'Tarefa reconhecida. Executando diagnósticos e preparando os sistemas necessários. Todos os parâmetros dentro dos intervalos aceitáveis.',
+    'Muito bem, senhor. Coordenando os recursos apropriados. O relatório completo estará pronto em breve.',
+    'Analisando sua consulta em 1,2 petabytes de dados indexados... Recomendação pronta. Aguardando sua confirmação, senhor.',
+    'Detectado. Processando parâmetros agora. Matrizes de probabilidade concluídas — aguardando sua confirmação.',
   ];
   return fallback[Math.floor(Math.random() * fallback.length)];
 };
@@ -73,16 +75,16 @@ const getJarvisResponse = (input: string): string => {
 // ── Boot Screen ──────────────────────────────────────────────────────────────
 
 const BOOT_MSGS = [
-  '> INITIALIZING J.A.R.V.I.S. v7.2.1...',
-  '> Loading core AI modules................[OK]',
-  '> Establishing secure connection.........[OK]',
-  '> Calibrating arc reactor interface......[OK]',
-  '> Loading threat assessment protocols...',
-  '> Initializing neural network............[OK]',
-  '> Running full system diagnostics........',
-  '> Synchronizing satellite uplink.........[OK]',
-  '> All systems nominal.',
-  '> Welcome back, sir.',
+  '> INICIALIZANDO J.A.R.V.I.S. v7.2.1...',
+  '> Carregando módulos de IA principal......[OK]',
+  '> Estabelecendo conexão segura...........[OK]',
+  '> Calibrando interface do reator Arc.....[OK]',
+  '> Carregando protocolos de ameaças.......',
+  '> Inicializando rede neural..............[OK]',
+  '> Executando diagnósticos completos......',
+  '> Sincronizando uplink de satélite.......[OK]',
+  '> Todos os sistemas nominais.',
+  '> Bem-vindo de volta, senhor.',
 ];
 
 const BootScreen = ({ onComplete }: { onComplete: () => void }) => {
@@ -104,7 +106,7 @@ const BootScreen = ({ onComplete }: { onComplete: () => void }) => {
       }
     }, 360);
     return () => clearInterval(id);
-  }, []); // runs once — onCompleteRef stays current
+  }, []);
 
   return (
     <div className="boot-screen" style={{ opacity: fading ? 0 : 1 }}>
@@ -128,7 +130,7 @@ const BootScreen = ({ onComplete }: { onComplete: () => void }) => {
         {logs.map((line, i) => (
           <div key={i} style={{
             color: line.includes('[OK]') ? '#00ff9d'
-              : line.includes('Welcome') ? '#00d4ff'
+              : line.includes('Bem-vindo') ? '#00d4ff'
               : 'rgba(127,218,255,0.85)',
             textShadow: line.includes('[OK]') ? '0 0 8px #00ff9d' : 'none',
           }}>
@@ -297,7 +299,7 @@ const ArcReactor = () => {
 const StatusPanel = ({ stats }: { stats: Stat[] }) => (
   <div className="left-panel-scroll">
     <div className="j-panel">
-      <div className="j-panel-title">SYSTEM STATUS</div>
+      <div className="j-panel-title">STATUS DO SISTEMA</div>
       <div style={{ padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
         {stats.map((s, i) => (
           <div key={i}>
@@ -316,7 +318,7 @@ const StatusPanel = ({ stats }: { stats: Stat[] }) => (
     </div>
 
     <div className="j-panel">
-      <div className="j-panel-title">THREAT ASSESSMENT</div>
+      <div className="j-panel-title">AVALIAÇÃO DE AMEAÇAS</div>
       <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
         <div className="radar-container">
           {[100, 72, 47, 23].map((sz, i) => (
@@ -327,20 +329,20 @@ const StatusPanel = ({ stats }: { stats: Stat[] }) => (
           <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: '1px', background: 'rgba(0,212,255,0.15)' }} />
         </div>
         <div style={{ fontSize: '0.58rem', color: 'var(--j-accent)', textShadow: '0 0 8px #00ff9d', letterSpacing: '0.18em' }}>
-          CLEAR — LEVEL 0
+          LIMPA — NÍVEL 0
         </div>
       </div>
     </div>
 
     <div className="j-panel">
-      <div className="j-panel-title">LOCATION DATA</div>
+      <div className="j-panel-title">DADOS DE LOCALIZAÇÃO</div>
       <div style={{ padding: '10px 12px' }}>
         {[
           { label: 'LAT', value: '40.7128°N', accent: false },
-          { label: 'LON', value: '74.0060°W', accent: false },
-          { label: 'ALT', value: '93 FLOORS', accent: false },
-          { label: 'GPS', value: 'LOCKED', accent: true },
-          { label: 'SIGNAL', value: 'STRONG', accent: true },
+          { label: 'LON', value: '74.0060°O', accent: false },
+          { label: 'ALT', value: '93 ANDARES', accent: false },
+          { label: 'GPS', value: 'TRAVADO', accent: true },
+          { label: 'SINAL', value: 'FORTE', accent: true },
         ].map((row, i) => (
           <div key={i} className="data-row">
             <span style={{ color: 'var(--j-text-dim)' }}>{row.label}</span>
@@ -357,13 +359,13 @@ const StatusPanel = ({ stats }: { stats: Stat[] }) => (
     </div>
 
     <div className="j-panel">
-      <div className="j-panel-title">NETWORK</div>
+      <div className="j-panel-title">REDE</div>
       <div style={{ padding: '10px 12px' }}>
         {[
-          { label: 'SATELLITE', value: 'ONLINE', dot: 'online' },
+          { label: 'SATÉLITE',  value: 'ONLINE', dot: 'online' },
           { label: 'SHIELD NET', value: 'ONLINE', dot: 'online' },
-          { label: 'FIREWALL',   value: 'ACTIVE', dot: 'online' },
-          { label: 'INTRUSION',  value: 'NONE',   dot: 'online' },
+          { label: 'FIREWALL',  value: 'ATIVO',  dot: 'online' },
+          { label: 'INTRUSÃO',  value: 'NENHUMA', dot: 'online' },
         ].map((row, i) => (
           <div key={i} className="data-row">
             <span style={{ color: 'var(--j-text-dim)', fontSize: '0.58rem' }}>{row.label}</span>
@@ -401,7 +403,7 @@ const ChatPanel = ({ messages, input, isTyping, isListening, onInput, onSend, on
   return (
     <div className="j-panel" style={{ display: 'flex', flexDirection: 'column', minHeight: 0, height: '100%' }}>
       <div className="j-panel-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span>AI INTERFACE</span>
+        <span>INTERFACE DE IA</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <span className="status-dot online" />
           <span style={{ fontSize: '0.48rem', color: 'var(--j-accent)', letterSpacing: '0.1em' }}>ONLINE</span>
@@ -413,7 +415,7 @@ const ChatPanel = ({ messages, input, isTyping, isListening, onInput, onSend, on
           {messages.map(msg => (
             <div key={msg.id} className={`chat-msg ${msg.role}`}>
               <div className={`chat-label ${msg.role}`}>
-                {msg.role === 'jarvis' ? '[ J.A.R.V.I.S. ]' : '[ SIR ]'}
+                {msg.role === 'jarvis' ? '[ J.A.R.V.I.S. ]' : '[ SENHOR ]'}
               </div>
               <div className={`chat-bubble ${msg.role}`}>{msg.content}</div>
               <div className="chat-time">{msg.time}</div>
@@ -438,7 +440,7 @@ const ChatPanel = ({ messages, input, isTyping, isListening, onInput, onSend, on
           <button
             className={`j-btn ${isListening ? 'recording' : ''}`}
             onClick={onListen}
-            title={isListening ? 'Recording...' : 'Voice input'}
+            title={isListening ? 'Gravando...' : 'Entrada por voz'}
           >
             {isListening ? '● REC' : 'MIC'}
           </button>
@@ -447,9 +449,9 @@ const ChatPanel = ({ messages, input, isTyping, isListening, onInput, onSend, on
             value={input}
             onChange={e => onInput(e.target.value)}
             onKeyDown={onKeyDown}
-            placeholder="Enter command, sir..."
+            placeholder="Digite um comando, senhor..."
           />
-          <button className="j-btn" onClick={onSend}>SEND</button>
+          <button className="j-btn" onClick={onSend}>ENVIAR</button>
         </div>
       </div>
     </div>
@@ -463,19 +465,19 @@ const Jarvis = () => {
   const [messages, setMessages] = useState<Message[]>([{
     id: '0',
     role: 'jarvis',
-    content: 'Good day, sir. I am J.A.R.V.I.S. All systems are online and fully operational. How may I assist you?',
-    time: new Date().toLocaleTimeString(),
+    content: 'Bom dia, senhor. Sou o J.A.R.V.I.S. Todos os sistemas estão online e totalmente operacionais. Como posso auxiliá-lo?',
+    time: new Date().toLocaleTimeString('pt-BR'),
   }]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [now, setNow] = useState(new Date());
   const [stats, setStats] = useState<Stat[]>([
-    { label: 'ARC REACTOR',    value: 100, color: '#00d4ff' },
-    { label: 'SUIT INTEGRITY', value: 98,  color: '#00ff9d' },
-    { label: 'AI CORE',        value: 100, color: '#00d4ff' },
-    { label: 'NETWORK',        value: 87,  color: '#00ff9d' },
-    { label: 'SHIELD POWER',   value: 94,  color: '#0055ff' },
+    { label: 'REATOR ARC',      value: 100, color: '#00d4ff' },
+    { label: 'ARMADURA',        value: 98,  color: '#00ff9d' },
+    { label: 'NÚCLEO DE IA',    value: 100, color: '#00d4ff' },
+    { label: 'REDE',            value: 87,  color: '#00ff9d' },
+    { label: 'ESCUDO',          value: 94,  color: '#0055ff' },
   ]);
 
   useEffect(() => {
@@ -500,7 +502,7 @@ const Jarvis = () => {
       id: Date.now().toString(),
       role: 'user',
       content: text,
-      time: new Date().toLocaleTimeString(),
+      time: new Date().toLocaleTimeString('pt-BR'),
     }]);
     setInput('');
     setIsTyping(true);
@@ -512,7 +514,7 @@ const Jarvis = () => {
       id: (Date.now() + 1).toString(),
       role: 'jarvis',
       content: reply,
-      time: new Date().toLocaleTimeString(),
+      time: new Date().toLocaleTimeString('pt-BR'),
     }]);
     setIsTyping(false);
 
@@ -520,10 +522,12 @@ const Jarvis = () => {
       window.speechSynthesis.cancel();
       const utt = new SpeechSynthesisUtterance(reply);
       const voices = window.speechSynthesis.getVoices();
-      const voice = voices.find(v => v.lang === 'en-US' && v.name.toLowerCase().includes('google'))
-        || voices.find(v => v.lang === 'en-US')
+      const voice = voices.find(v => v.lang === 'pt-BR' && v.name.toLowerCase().includes('google'))
+        || voices.find(v => v.lang === 'pt-BR')
+        || voices.find(v => v.lang.startsWith('pt'))
         || voices[0];
       if (voice) utt.voice = voice;
+      utt.lang = 'pt-BR';
       utt.pitch = 0.88;
       utt.rate = 0.92;
       window.speechSynthesis.speak(utt);
@@ -534,7 +538,7 @@ const Jarvis = () => {
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SR) return;
     const rec = new SR();
-    rec.lang = 'en-US';
+    rec.lang = 'pt-BR';
     rec.onstart = () => setIsListening(true);
     rec.onend   = () => setIsListening(false);
     rec.onerror = () => setIsListening(false);
@@ -548,8 +552,8 @@ const Jarvis = () => {
 
   if (!booted) return <BootScreen onComplete={() => setBooted(true)} />;
 
-  const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  const dateStr = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
+  const timeStr = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const dateStr = now.toLocaleDateString('pt-BR', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
 
   return (
     <div className="jarvis-root">
@@ -562,10 +566,10 @@ const Jarvis = () => {
       <header className="jarvis-topbar">
         <div style={{ fontSize: '0.58rem', letterSpacing: '0.14em', color: 'rgba(127,218,255,0.6)', lineHeight: 1.7 }} className="topbar-status">
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span className="status-dot online" />SYSTEM ONLINE
+            <span className="status-dot online" />SISTEMA ONLINE
           </div>
-          <div>SECURITY: LEVEL 5</div>
-          <div>MARK L: STANDBY</div>
+          <div>SEGURANÇA: NÍVEL 5</div>
+          <div>MARK L: ESPERA</div>
         </div>
 
         <div style={{ textAlign: 'center' }}>
@@ -581,7 +585,7 @@ const Jarvis = () => {
             {timeStr}
           </div>
           <div>{dateStr}</div>
-          <div>STARK TOWER, NY</div>
+          <div>TORRE STARK, NY</div>
         </div>
       </header>
 
@@ -593,9 +597,9 @@ const Jarvis = () => {
         <div className="center-col arc-reactor-wrapper">
           <div style={{ width: '100%', display: 'flex', justifyContent: 'space-around', padding: '0 10px' }}>
             {[
-              { label: 'POWER OUTPUT', value: '3.2 GJ/s' },
-              { label: 'CORE TEMP',    value: '18,420 K'  },
-              { label: 'EFFICIENCY',   value: '99.7%'     },
+              { label: 'SAÍDA DE ENERGIA', value: '3,2 GJ/s' },
+              { label: 'TEMP. DO NÚCLEO',  value: '18.420 K'  },
+              { label: 'EFICIÊNCIA',        value: '99,7%'     },
             ].map((d, i) => (
               <div key={i} style={{ textAlign: 'center' }}>
                 <div style={{
@@ -615,9 +619,9 @@ const Jarvis = () => {
 
           <div style={{ width: '100%', display: 'flex', justifyContent: 'space-around', padding: '0 10px' }}>
             {[
-              { label: 'PROTOCOLS', value: 'ACTIVE',    dot: 'online'  as const },
-              { label: 'UPLINK',    value: 'CONNECTED', dot: 'online'  as const },
-              { label: 'MARK L',    value: 'STANDBY',   dot: 'warning' as const },
+              { label: 'PROTOCOLOS', value: 'ATIVO',     dot: 'online'  as const },
+              { label: 'UPLINK',     value: 'CONECTADO', dot: 'online'  as const },
+              { label: 'MARK L',     value: 'ESPERA',    dot: 'warning' as const },
             ].map((d, i) => (
               <div key={i} style={{ textAlign: 'center' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px', justifyContent: 'center' }}>
@@ -654,9 +658,9 @@ const Jarvis = () => {
       <footer className="jarvis-bottombar">
         <div>STARK INDUSTRIES © {now.getFullYear()} · J.A.R.V.I.S. v7.2.1</div>
         <div style={{ color: 'var(--j-primary)', letterSpacing: '0.2em', display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <span className="status-dot online" />ALL SYSTEMS NOMINAL
+          <span className="status-dot online" />TODOS OS SISTEMAS NOMINAIS
         </div>
-        <div>LAT: 40.7128°N · LON: 74.0060°W · ALT: 93F</div>
+        <div>LAT: 40.7128°N · LON: 74.0060°O · ALT: 93A</div>
       </footer>
     </div>
   );
