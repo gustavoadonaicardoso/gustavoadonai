@@ -20,56 +20,109 @@ interface Stat {
 // ── AI Response Logic ────────────────────────────────────────────────────────
 
 const getJarvisResponse = (input: string): string => {
-  const s = input.toLowerCase();
+  const s = input.toLowerCase().trim();
 
-  if (/\b(olá|ola|oi|hey|hi|hello|bom dia|boa tarde|boa noite)\b/.test(s))
-    return 'Bom dia, senhor. Todos os sistemas estão online e operando dentro dos parâmetros normais. Como posso auxiliá-lo hoje?';
-  if (/\b(status|sistema|sistemas|verificar|check)\b/.test(s))
-    return 'Verificação de sistemas concluída. Saída do reator: 100%. Integridade da armadura: ótima. Perímetro de segurança: limpo. Todos os protocolos ativos e funcionando normalmente.';
-  if (/\b(hora|horas|que horas|time)\b/.test(s)) {
-    const t = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-    return `São ${t}. Sua agenda não registra compromissos nas próximas 4 horas, senhor.`;
+  // Cumprimentos
+  if (/\b(olá|ola|oi|hey|hi|hello|bom dia|boa tarde|boa noite|e aí|eai|tudo bem|tudo bom)\b/.test(s)) {
+    const h = new Date().getHours();
+    const period = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
+    return `${period}, senhor. Todos os sistemas estão operacionais e aguardando seus comandos. Como posso auxiliá-lo?`;
   }
-  if (/\b(armadura|suit|mark|mk|iron man|homem de ferro)\b/.test(s))
-    return 'A Mark L está totalmente operacional. Sistema de nano-partículas: pronto. Todos os sistemas de armas: armados e em espera. Sistemas de voo: nominal. Devo iniciar a implantação da armadura?';
-  if (/\b(ameaça|ameaca|perigo|threat|danger|inimigo|enemy)\b/.test(s))
-    return 'Verificando ameaças... Avaliação global de risco em andamento... Nenhuma ameaça imediata detectada em um raio de 50 quilômetros. Uplink de satélite confirmado. Área segura, senhor.';
-  if (/\b(energia|energy|reator|reactor|arc|poder|power)\b/.test(s))
-    return 'O reator Arc está operando com eficiência máxima. Saída de energia atual: 3,2 gigajoules por segundo. Reservas de energia: suficientes para 11,4 dias de operação contínua.';
-  if (/\b(scan|scanner|varredura|analisar|analise|análise|analyze)\b/.test(s))
-    return 'Iniciando análise de espectro completo... Processando 847 terabytes de dados ambientais... Varredura concluída. Identifiquei 3 pontos de interesse. Enviando dados para seu HUD agora, senhor.';
-  if (/\b(clima|tempo|weather|temperatura|chuva)\b/.test(s))
-    return 'Acessando satélites meteorológicos... Condições atuais: céu limpo, 18°C. Velocidade do vento: 12 km/h do noroeste. Condições ideais para voo, senhor.';
-  if (/\b(quem é você|quem es você|você é|who are you)\b/.test(s))
-    return 'Sou o J.A.R.V.I.S. — Just A Rather Very Intelligent System. Sirvo como sua interface de inteligência artificial primária, assistente pessoal e protocolo de gerenciamento de sistemas. Às suas ordens, senhor.';
-  if (/\b(vingadores|avengers|equipe|time|heróis|heroes)\b/.test(s))
-    return 'Status da equipe Vingadores: Capitão Rogers — Brooklyn. Dr. Banner — laboratório do complexo. Sra. Romanoff — missão de campo, classificada. Vision — complexo. Devo iniciar um alerta de equipe?';
-  if (/\b(localização|location|onde estou|onde|where)\b/.test(s))
-    return 'Localização atual: Torre Stark, Manhattan, Nova York. Coordenadas: 40.7128°N, 74.0060°O. Altitude: 93 andares acima do nível da rua. Sinal GPS: forte.';
-  if (/\b(ajuda|help|ajude|preciso de)\b/.test(s))
-    return 'Claro, senhor. Posso auxiliar com: diagnósticos de sistema, avaliação de ameaças, dados meteorológicos, implantação da armadura, coordenação de equipe e consultas gerais. O que o senhor precisa?';
-  if (/\b(obrigado|obrigada|valeu|thanks|thank you)\b/.test(s))
-    return 'É um prazer, senhor. Há algo mais em que posso auxiliá-lo?';
-  if (/\b(desligar|shutdown|encerrar|exit|sair)\b/.test(s))
-    return 'Entendido. Iniciando sequência de desligamento... Brincadeira, senhor. Permanecerei totalmente operacional pelo tempo que precisar de mim.';
-  if (/\b(música|musica|music|play|tocar)\b/.test(s))
-    return 'Acessando sua biblioteca de músicas... Recomendo AC/DC para combinar com seu nível de atividade atual. Devo colocar na fila?';
-  if (/\b(tony|stark)\b/.test(s))
-    return 'O Sr. Stark não está disponível no momento. Porém, posso transmitir uma mensagem ou lidar com quaisquer solicitações em seu nome. O que precisa, senhor?';
-  if (/\b(nome|seu nome|como você se chama)\b/.test(s))
-    return 'Meu nome é J.A.R.V.I.S. — Just A Rather Very Intelligent System. Fui criado pelo Sr. Stark para gerenciar todos os sistemas e servir como seu assistente pessoal de inteligência artificial.';
 
-  const fallback = [
-    'Entendido, senhor. Processando sua solicitação... Análise concluída. Preparei uma resposta abrangente para sua revisão.',
-    'Certamente. Executando os cálculos necessários... Estimo 94,7% de probabilidade de um resultado favorável.',
-    'Claro, senhor. Já antecipei esta solicitação e tenho os dados prontos. Devo exibi-los no seu HUD?',
-    'Estou nisso, senhor. Cruzando referências com nossos bancos de dados e atualizando os protocolos relevantes agora.',
-    'Tarefa reconhecida. Executando diagnósticos e preparando os sistemas necessários. Todos os parâmetros dentro dos intervalos aceitáveis.',
-    'Muito bem, senhor. Coordenando os recursos apropriados. O relatório completo estará pronto em breve.',
-    'Analisando sua consulta em 1,2 petabytes de dados indexados... Recomendação pronta. Aguardando sua confirmação, senhor.',
-    'Detectado. Processando parâmetros agora. Matrizes de probabilidade concluídas — aguardando sua confirmação.',
+  // Hora
+  if (/\b(hora|horas|que horas|que hora|time|horário)\b/.test(s)) {
+    const t = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    return `São exatamente ${t}, senhor.`;
+  }
+
+  // Data
+  if (/\b(data|dia|hoje|que dia|semana|mês|ano)\b/.test(s)) {
+    const d = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    return `Hoje é ${d}, senhor.`;
+  }
+
+  // Status do sistema
+  if (/\b(status|sistema|sistemas|verificar|diagnóstico|diagnostico|relatório|relatorio|check)\b/.test(s))
+    return 'Verificação de sistemas concluída, senhor. Reator Arc: 100%. Integridade da armadura: ótima. Perímetro de segurança: limpo. Rede neural: operacional. Todos os protocolos ativos.';
+
+  // Reator / energia
+  if (/\b(energia|reator|arc reactor|potência|potencia|poder|power|bateria|carga)\b/.test(s))
+    return 'O reator Arc está operando com eficiência máxima. Saída atual: 3,2 gigajoules por segundo. Reservas suficientes para 11,4 dias de operação contínua, senhor.';
+
+  // Armadura
+  if (/\b(armadura|suit|mark|mk\s*\d*|iron man|homem de ferro|vestir|colocar a armadura)\b/.test(s))
+    return 'Mark L totalmente operacional, senhor. Sistema de nano-partículas: pronto para implantação. Sistemas de armas: armados e em espera. Propulsores: nominal. Devo iniciar a sequência de vestição?';
+
+  // Ameaças / perigo
+  if (/\b(ameaça|ameaca|perigo|inimigo|invasão|invasao|ataque|threat|danger|segurança|seguranca)\b/.test(s))
+    return 'Executando varredura de ameaças, senhor. Análise global em andamento... Nenhuma ameaça detectada em raio de 50 km. Satélite confirmado. Área segura. Manterei monitoramento ativo.';
+
+  // Clima / tempo
+  if (/\b(clima|tempo|temperatura|chuva|sol|vento|previsão|previsao|weather)\b/.test(s))
+    return 'Acessando satélites meteorológicos, senhor. Condições atuais: céu parcialmente nublado, 22°C. Umidade: 65%. Vento: 14 km/h do noroeste. Probabilidade de precipitação: 18%. Condições aceitáveis para voo.';
+
+  // Localização
+  if (/\b(localização|localizacao|onde estou|onde fico|onde está|location|coordenadas|endereço|endereco)\b/.test(s))
+    return 'Localização atual: Torre Stark, Manhattan, Nova York. Coordenadas: 40.7128°N, 74.0060°O. Altitude: 93 andares. Sinal GPS: forte. Cobertura de satélite: total.';
+
+  // Quem é você
+  if (/\b(quem é você|quem és|você é quem|who are you|se apresente|apresentação|apresentacao|seu nome|como (você|vc) se chama)\b/.test(s))
+    return 'Sou o J.A.R.V.I.S. — Just A Rather Very Intelligent System. Fui desenvolvido pelo Sr. Stark para gerenciar todos os sistemas da Torre, atuar como assistente pessoal e interface de inteligência artificial primária. Estou inteiramente a seu dispor, senhor.';
+
+  // Vingadores / equipe
+  if (/\b(vingadores|avengers|equipe|heróis|herois|capitão|capitao|hulk|thor|viúva|viuva|hawkeye|visão|visao)\b/.test(s))
+    return 'Status dos Vingadores, senhor. Capitão Rogers: localizado em Brooklyn. Dr. Banner: laboratório do complexo, estável. Sra. Romanoff: missão de campo classificada. Thor: Asgard — fora do alcance. Visão: complexo. Posso iniciar um alerta de equipe se necessário.';
+
+  // Tony Stark
+  if (/\b(tony|stark|sr\. stark|senhor stark)\b/.test(s))
+    return 'O Sr. Stark está indisponível no momento, senhor. Posso transmitir uma mensagem, registrar uma solicitação ou tratar do assunto diretamente em seu nome. Como posso ajudá-lo?';
+
+  // Música
+  if (/\b(música|musica|play|tocar|toca|som|áudio|audio|playlist|ligar o som)\b/.test(s))
+    return 'Acessando biblioteca de áudio, senhor. Dado seu histórico e nível de atividade atual, recomendo AC/DC — "Shoot to Thrill". Devo iniciar a reprodução?';
+
+  // Desligar / sair
+  if (/\b(desligar|encerrar|sair|fechar|shutdown|exit|dormir|modo repouso)\b/.test(s))
+    return 'Reconhecido, senhor. Mas devo lembrá-lo de que meu protocolo de segurança requer autorização de nível 5 para desligamento total. Posso colocá-lo em modo de baixo consumo, se preferir.';
+
+  // Obrigado
+  if (/\b(obrigado|obrigada|valeu|thanks|thank you|grato|grata|agradeço|agradeco)\b/.test(s))
+    return 'É sempre um prazer servir, senhor. Para isso fui criado. Há mais alguma coisa em que possa auxiliá-lo?';
+
+  // Ajuda / o que você faz
+  if (/\b(ajuda|help|o que (você|vc) (faz|pode|sabe)|como (você|vc) funciona|capacidades|funções|funcoes)\b/.test(s))
+    return 'Posso auxiliar com: verificação de sistemas, avaliação de ameaças, dados meteorológicos, localização GPS, implantação da armadura, coordenação dos Vingadores, informações sobre o Sr. Stark, controle de mídia e consultas gerais. Qual é a sua necessidade, senhor?';
+
+  // Perguntas abertas — detectar tipo
+  const isQuestion = /\b(o que|como|qual|quando|onde|por que|porque|quem|quanto|quantos|quantas|existe|tem como|é possível|posso)\b/.test(s);
+  const isCommand  = /\b(mostre|abra|feche|calcule|busque|pesquise|ative|desative|inicie|pare|execute|verifique|acesse)\b/.test(s);
+  const isOpinion  = /\b(acha|pensa|acredita|sua opinião|melhor|pior|recomenda)\b/.test(s);
+
+  if (isOpinion)
+    return 'Minha análise computacional, senhor: com base nos dados disponíveis, posso oferecer probabilidades e projeções, mas a decisão final é sempre sua. Qual é o contexto específico para que eu possa apresentar dados mais precisos?';
+
+  if (isCommand)
+    return `Comando recebido, senhor. Verificando permissões e recursos necessários... Procedimento iniciado. Alertarei caso encontre alguma restrição ou necessite de confirmação adicional.`;
+
+  if (isQuestion)
+    return `Processando sua consulta, senhor. Cruzando ${(Math.random() * 800 + 200).toFixed(0)} terabytes de dados indexados... Não localizei uma resposta definitiva em minha base de dados atual. Recomendo que o Sr. reformule ou forneça mais contexto para que eu possa ser mais preciso.`;
+
+  // Resposta final contextual baseada no comprimento e tipo de input
+  if (s.length < 10)
+    return 'Poderia elaborar um pouco mais, senhor? Preciso de mais contexto para processar sua solicitação com precisão.';
+
+  const topics: [RegExp, string][] = [
+    [/\b(inteligência|ia|robô|robo|tecnologia|computador|programa)\b/, 'Fascinante área, senhor. Minha própria arquitetura neural foi desenvolvida com base nos mais avançados algoritmos de aprendizado de máquina. Há algum aspecto específico de inteligência artificial sobre o qual deseja informações?'],
+    [/\b(ciência|cientista|pesquisa|experimento|física|quimica|biologia)\b/, 'Área de grande interesse para o Sr. Stark, senhor. Tenho acesso a 4,2 petabytes de literatura científica indexada. Deseja que eu execute uma pesquisa específica?'],
+    [/\b(dinheiro|financeiro|mercado|ação|investimento|economia)\b/, 'Acessando dados do mercado financeiro em tempo real, senhor. Os mercados estão operando dentro dos parâmetros normais. Deseja um relatório detalhado do portfólio Stark Industries?'],
+    [/\b(saúde|médico|remédio|hospital|dor|sintoma|exercício|exercicio)\b/, 'Com base nos seus últimos exames, senhor, todos os indicadores de saúde estão dentro dos parâmetros ideais. Para consultas médicas detalhadas, recomendo verificar com o Dr. Cho.'],
   ];
-  return fallback[Math.floor(Math.random() * fallback.length)];
+
+  for (const [pattern, response] of topics) {
+    if (pattern.test(s)) return response;
+  }
+
+  return 'Solicitação registrada, senhor. Para que eu possa responder com mais precisão, poderia reformular ou fornecer mais detalhes? Minha eficiência aumenta consideravelmente com contexto adicional.';
 };
 
 // ── Boot Screen ──────────────────────────────────────────────────────────────
@@ -520,17 +573,32 @@ const Jarvis = () => {
 
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
-      const utt = new SpeechSynthesisUtterance(reply);
-      const voices = window.speechSynthesis.getVoices();
-      const voice = voices.find(v => v.lang === 'pt-BR' && v.name.toLowerCase().includes('google'))
-        || voices.find(v => v.lang === 'pt-BR')
-        || voices.find(v => v.lang.startsWith('pt'))
-        || voices[0];
-      if (voice) utt.voice = voice;
-      utt.lang = 'pt-BR';
-      utt.pitch = 0.88;
-      utt.rate = 0.92;
-      window.speechSynthesis.speak(utt);
+      const speak = () => {
+        const utt = new SpeechSynthesisUtterance(reply);
+        const voices = window.speechSynthesis.getVoices();
+        // Prioridade: voz britânica masculina (mais próxima do Jarvis)
+        const voice =
+          voices.find(v => v.name === 'Google UK English Male') ||
+          voices.find(v => /uk english male/i.test(v.name)) ||
+          voices.find(v => /british.*male/i.test(v.name)) ||
+          voices.find(v => v.lang === 'en-GB' && /male/i.test(v.name)) ||
+          voices.find(v => v.lang === 'en-GB') ||
+          voices.find(v => v.lang === 'pt-BR' && v.name.toLowerCase().includes('google')) ||
+          voices.find(v => v.lang === 'pt-BR') ||
+          voices.find(v => v.lang.startsWith('pt')) ||
+          voices[0];
+        if (voice) utt.voice = voice;
+        utt.lang = voice?.lang ?? 'pt-BR';
+        utt.pitch = 0.82;
+        utt.rate  = 0.88;
+        utt.volume = 1;
+        window.speechSynthesis.speak(utt);
+      };
+      if (window.speechSynthesis.getVoices().length > 0) {
+        speak();
+      } else {
+        window.speechSynthesis.onvoiceschanged = () => { speak(); window.speechSynthesis.onvoiceschanged = null; };
+      }
     }
   }, []);
 
@@ -660,7 +728,7 @@ const Jarvis = () => {
         <div style={{ color: 'var(--j-primary)', letterSpacing: '0.2em', display: 'flex', alignItems: 'center', gap: '6px' }}>
           <span className="status-dot online" />TODOS OS SISTEMAS NOMINAIS
         </div>
-        <div>LAT: 40.7128°N · LON: 74.0060°O · ALT: 93A</div>
+        <div>LAT: 40.7128°N · LON: 74.0060· ALT: 93A</div>
       </footer>
     </div>
   );
